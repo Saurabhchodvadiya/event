@@ -248,3 +248,26 @@ def test_remove_user_from_event():
         assert response.status_code == 200
     else:
          assert response.status_code == 400
+
+
+import json
+import pytest
+
+def test_get_event_api():
+    url = 'http://localhost:8000/user/get_event_Api'
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294'
+    }
+    data = {
+        'end_Date': None,
+        'start_Date': None
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    # Perform assertions to validate the response
+    if response.status_code==200:
+        assert response.status_code == 200
+    else:
+         assert response.status_code == 400

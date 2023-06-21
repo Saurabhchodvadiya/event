@@ -21,15 +21,24 @@ from rest_framework.permissions import AllowAny
 import jwt
 from datetime import datetime,date
 
+def decode_functions(request):
+    token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
+    user = User_detail.objects.filter(id=payload["user_id"],is_active=1)
+    if user.exists()==False:
+        return False,payload
+    else:
+        return True,payload
+
+
 
 @api_view(['post'])
 @permission_classes((AllowAny,))
 def register_user_event_Api(request):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1)
-        if user.exists()==False:
+        status, payload=decode_functions(request)
+        
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -81,3 +90,41 @@ def register_user_event_Api(request):
         return Response({"status":False,"msg":str(e)}, status=500)
     
 
+
+
+@api_view(['post'])
+@permission_classes((AllowAny,))
+def get_event_Api(request):
+    try:
+        status, payload=decode_functions(request)
+        if status==False:
+            return Response({'status':False,
+                                'msg':"Data not found"
+                }, status=400)
+
+        else:
+            # import pdb
+            # pdb.set_trace()
+            user_data=dict(request.data)
+            print(user_data)
+            if user_data["end_Date"]==None and user_data["start_Date"]==None:
+                event_data=create_event.objects.filter(is_active=1)
+            elif user_data["end_Date"]==None:
+                event_data=create_event.objects.filter(is_active=1,start_Date=user_data["start_Date"])
+           
+            elif user_data["start_Date"]==None:
+                event_data=create_event.objects.filter(is_active=1,end_Date=user_data["end_Date"])
+            elif user_data["start_Date"]!=None and user_data["end_Date"]!=None:
+                event_data=create_event.objects.filter(is_active=1,start_Date=user_data["start_Date"],end_Date=user_data["end_Date"])
+            else:
+                event_data=create_event.objects.filter(is_active=1)
+
+            serializer = get_Data_filter(event_data.all(), many=True)
+            
+                
+            serialized_data = serializer.data
+            return Response({'status':True,
+                                'msg':"Data Recived Successfully","data":serialized_data})
+                
+    except Exception  as e:
+        return Response({"status":False,"msg":str(e)}, status=500)

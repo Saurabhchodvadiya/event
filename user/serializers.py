@@ -5,6 +5,11 @@ import re
 from utils.pattern import mobile_no,email,bod,name,password
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+
+class get_Data_filter(serializers.ModelSerializer):
+    class Meta:
+        model = create_event
+        fields = '__all__'
 class register_event_serializer(serializers.ModelSerializer):
     class Meta:
         model = register_event
