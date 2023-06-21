@@ -125,10 +125,8 @@ class CustomUserBackend(BaseBackend):
 @permission_classes((AllowAny,))
 def create_event_Api(request):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -147,14 +145,23 @@ def create_event_Api(request):
             return Response(serializer.errors, status=400)
     except Exception  as e:
         return Response({"status":False,"msg":str(e)}, status=500)
+    
+
+def decode_function(request):
+    token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
+    user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
+    if user.exists()==False:
+        return False,payload
+    else:
+        return True,payload
+
 @api_view(['get'])
 @permission_classes((AllowAny,))
 def get_all_event(request):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -230,10 +237,8 @@ def update_model_instance(instance, data_dict):
 @permission_classes((AllowAny,))
 def update_event_by_id(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -288,10 +293,8 @@ def update_event_by_id(request,id):
 @permission_classes((AllowAny,))
 def remove_event_by_id(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -321,10 +324,8 @@ def remove_event_by_id(request,id):
 @permission_classes((AllowAny,))
 def remove_event_by_id(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -355,10 +356,8 @@ def remove_event_by_id(request,id):
 @permission_classes((AllowAny,))
 def get_all_user(request):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -381,10 +380,8 @@ def get_all_user(request):
 @permission_classes((AllowAny,))
 def get_user_id(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -407,10 +404,8 @@ from django.core import serializers
 @permission_classes((AllowAny,))
 def get_user_detail_by_event(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -436,10 +431,8 @@ from user.models import register_event
 @permission_classes((AllowAny,))
 def get_participated_user_detail_by_event(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -467,10 +460,8 @@ from user.models import register_event
 @permission_classes((AllowAny,))
 def user_participated_event(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)
@@ -511,15 +502,15 @@ def user_participated_event(request,id):
 # inner join  DPA_FDP_DEV_V2.SECMASTER_STANDARDPENDING a on a.fund_id=b.fund_id and a.snapshot_date=b.snapshot_date and a.import_file_id=b.import_file_id and a.holding_type=b.data_type
 # where b.import_file_id=3346995
 
-from datetime import datetime
+
+
+
 @api_view(['put'])
 @permission_classes((AllowAny,))
 def remove_user_from_event(request,id):
     try:
-        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
-        payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
-        if user.exists()==False:
+        status, payload=decode_function(request)
+        if status==False:
             return Response({'status':False,
                                 'msg':"Data not found"
                 }, status=400)

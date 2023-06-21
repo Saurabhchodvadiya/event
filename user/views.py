@@ -28,7 +28,7 @@ def register_user_event_Api(request):
     try:
         token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
         payload = dict(jwt.decode(jwt=token, key=SECRET_KEY, algorithms=['HS256']))
-        user = User_detail.objects.filter(id=payload["user_id"],is_active=1,is_admin=1)
+        user = User_detail.objects.filter(id=payload["user_id"],is_active=1)
         if user.exists()==False:
             return Response({'status':False,
                                 'msg':"Data not found"
