@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "39f78de2-3121-4800-906b-a21a94f02d71",
+		"name": "event management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24720243"
+	},
+	"item": [
+		{
+			"name": "add user admin as well as user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"chodvadiyasaurabh1111@gmail.com\",\"date_of_birth\":\"2022-10-12\",\"phone_number\":\"9664560489\",\"first_name\":\"saurabh\",\"last_name\":\"chodvadiya\",\"password\":\"Saurabh123@\",\r\n\"is_admin\":\"0\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"chodvadiyasaurabh1@gmail.com\",\"password\":\"Saurabh123@\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_name\":\"cricket\",\"start_Date\":\"2023-06-19\",\"end_Date\":\"2023-06-20\",\"total_participants\":\"3\",\"starting_time\":\"11:30:00\",\"ending_time\":\"11:30:00\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/create_event",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"create_event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_event",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI4Mzk5LCJpYXQiOjE2ODcyMjgzOTksImp0aSI6ImYwYWIyNjliNTJiNzRlNGE5ZGMxNzBhZDJmMzVmZGZiIiwidXNlcl9pZCI6Nn0.YQR5RHdnehC8rUxKa3NcTvo1dXlpBNtNIacD2UvVi6U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4NzI2NzgwNCwiaWF0IjoxNjg3MTgxNDA0LCJqdGkiOiI0NGQwM2ExZGE2OGM0ZTYxYjA4NmVkYzczNTgyNTM2OCIsInVzZXJfaWQiOjZ9.muBBIUVBR0OcQeLs-a9PZ24H3wR9TWwgJBFva0pFOb4\",\"date_of_birth\":\"2022-10-12\",\"phone_number\":\"7894567423\",\"first_name\":\"saurabh\",\"last_name\":\"chodvadiya\",\"password\":\"Saurabh123@\",\r\n\"is_admin\":\"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/get_all_event",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"get_all_event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NDkxNjA4LCJpYXQiOjE2ODcxOTE2MDgsImp0aSI6ImM3YTk5ZjZjY2QzYzQzN2U5ZmI5ZjczNzM3MGQzYWE2IiwidXNlcl9pZCI6Nn0.pvmeyd6Pya4UswCzSRYgtWeJ9_pMdhIXrCCo5BxYjq4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/remove-event-by-id/3/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"remove-event-by-id",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get event by  organizer id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NDkxNjA4LCJpYXQiOjE2ODcxOTE2MDgsImp0aSI6ImM3YTk5ZjZjY2QzYzQzN2U5ZmI5ZjczNzM3MGQzYWE2IiwidXNlcl9pZCI6Nn0.pvmeyd6Pya4UswCzSRYgtWeJ9_pMdhIXrCCo5BxYjq4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/get-event-by-user-id/6/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"get-event-by-user-id",
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NDkxNjA4LCJpYXQiOjE2ODcxOTE2MDgsImp0aSI6ImM3YTk5ZjZjY2QzYzQzN2U5ZmI5ZjczNzM3MGQzYWE2IiwidXNlcl9pZCI6Nn0.pvmeyd6Pya4UswCzSRYgtWeJ9_pMdhIXrCCo5BxYjq4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_name\":\"hocky\",\"total_participants\":10}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/update-event-by-id/5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"update-event-by-id",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/get-all-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"get-all-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user apply for event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_id\":\"5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/register-user-event",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"register-user-event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data event create",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_id\":\"5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/get_user_detail_by_event/5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"get_user_detail_by_event",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_event_data_based_on event_id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_id\":\"5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/get_participated_user_detail_by_event/5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"get_participated_user_detail_by_event",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_event_data_based_on user_id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_id\":\"5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user_participated_event/6/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user_participated_event",
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove user from event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg3NTI2MzI0LCJpYXQiOjE2ODcyMjYzMjQsImp0aSI6IjNiNWE5ZTllMDU5NjRjMDM5ZmI3NGZlOGVlMGI2ZTA2IiwidXNlcl9pZCI6Nn0.4lqaYpJTmISyddTKiTuSISLipURabtn9SWtZ3vOn294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event_id\":\"5\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/remove_user_from_event/6/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"remove_user_from_event",
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
